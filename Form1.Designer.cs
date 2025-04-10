@@ -5,20 +5,28 @@ using System.Drawing.Text;
 
 namespace MineSweeper
 {
+    public static class ArrayExtensions
+{
+    public static void Initialize<T>(this T[,] array, Func<T> initializer)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                array[i, j] = initializer();
+            }
+        }
+    }
+}
     public class MineSweeperModel
     {
+
         private class Cell
         {
             public bool stateIsOpen;
             public bool stateIsMine;
             public int stateNearbyMines;
             
-            public Cell()
-            {
-                stateIsOpen = false;
-                stateIsMine = false;
-                stateNearbyMines = 0;
-            }
             public Cell(bool isOpen, bool IsMine, int nearbyMines)
             {
                 stateIsOpen = isOpen;
@@ -28,7 +36,8 @@ namespace MineSweeper
         }
 
         private static Random rng = new Random();
-        public static void Shuffle<T>(this IList<T> list)
+       
+        public static void Shuffle<T>(IList<T> list)
         {
             int n = list.Count;
             while (n > 1)
@@ -55,17 +64,17 @@ namespace MineSweeper
 
             private List<(int, int)> nearbyIndices(int i, int j)
             {
-                int xMin = Math.Max(0, j - 1);
-                int xMax = Math.Min(field.GetLength(0) - 1, j + 1);
-                int yMin = Math.Max(0, i - 1);
-                int yMax = Math.Min(field.GetLength(1) - 1, i + 1);
+                int xMin = Math.Max(0, i - 1);
+                int xMax = Math.Min(field.GetLength(0) - 1, i + 1);
+                int yMin = Math.Max(0, j - 1);
+                int yMax = Math.Min(field.GetLength(1) - 1, j + 1);
 
-                var xs = Enumerable.Range(xMin, xMax);
-                var ys = Enumerable.Range(yMin, yMax);
+                var xs = Enumerable.Range(xMin, xMax - xMin + 1);
+                var ys = Enumerable.Range(yMin, yMax - yMin + 1);
 
                 var indices = (from x in xs
                               from y in ys
-                              where !(x == j && y == i)
+                              where !(x == i && y == j)
                               select (x, y)).ToList();
 
                 return indices;
@@ -73,10 +82,6 @@ namespace MineSweeper
 
             private int countNearbyMines(int x, int y)
             {
-                //todo min(0, x - 1), max(length(0), x+1)
-                //     min(0, y - 1), max(length(1), y+1)
-                //     декартово произведение (или вложенный цикл)
-
                 int count = 0;
                 var indices = nearbyIndices(x, y);
 
@@ -89,17 +94,13 @@ namespace MineSweeper
             }
 
             public void fillAnew(int i, int j)
-            {
-                //todo проиницилизировать минное поле. Примерный процесс: При первом клике клетка, которую кликнули должна всегда быть пусто
-                //Дальше нужно использовать функцию/метод, который откроет все ближайшие клетки, до тех пор пока не наткнёмся на клетку
-                //в радиус которой есть хотя бы одна мина. 
-                //Нужно создать очередь/стек, который будет хранить координаты мины ??? и считать сколько уже созданно.
-                //Нужно взять генератор рандомных чисел, который будет создавать создавать мину только с определённым шансом, до тех пор
-                //пока кол-во мин не достигнет определённого кол-ва
-                
+            {   
                 field = new Cell[field.GetLength(0), field.GetLength(1)];
+                field.Initialize(() => new Cell(false, false, 0));
+
                 int mines = minesAmount;
                 Random random = new Random();
+
                 while (mines > 0)
                 {
                     var xs = Enumerable.Range(0, field.GetLength(0));
@@ -128,6 +129,32 @@ namespace MineSweeper
                         field[x, y].stateNearbyMines = countNearbyMines(x, y);
                     }
                 }
+            }
+            
+            public bool openCell(int x, int y)
+            {   
+                if(field[x, y].stateIsOpen)
+                {
+                    return true;
+                }
+                if (field[x, y].stateIsMine)
+                {
+                    return false;
+                }
+                else
+                {
+                    field[x, y].stateIsOpen = true;
+                }
+                if (field[x, y].stateNearbyMines > 0)
+                {
+                    return true;
+                }
+
+                foreach (var (i, j) in nearbyIndices(x, y))
+                {
+                    openCell(i, j);
+                }
+                return true;
             }
         }
         private MineField mineField;
