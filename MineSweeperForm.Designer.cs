@@ -20,6 +20,10 @@ namespace MineSweeper
 }
     public class MineSweeperModel
     {
+        public MineSweeperModel(int size, int mines)
+        {
+            mineField = new MineField(size, mines);
+        }
 
         private class Cell
         {
@@ -53,7 +57,7 @@ namespace MineSweeper
         private class MineField
         {
             int minesAmount = 0;
-            private Cell[,] field;
+            internal Cell[,] field;
 
             public MineField(int size, int mines)
             {
@@ -157,10 +161,41 @@ namespace MineSweeper
                 return true;
             }
         }
+
+        public void click (int x, int y)
+        {
+            if (!isStarted)
+            {
+                isStarted = true;
+                mineField.fillAnew(x, y);
+                return;
+            }
+        }
+        public int countMines()
+        {
+            var count = 0;
+
+            foreach (Cell cell in mineField.field)
+            {
+                if (cell.stateIsMine)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public bool hasMine(int x, int y)
+        {
+            return mineField.field[x, y].stateIsMine;
+        }
+
+
+        private bool isStarted = false;
         private MineField mineField;
     }
 
-    partial class Form1
+    partial class MineSweeperForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -188,10 +223,17 @@ namespace MineSweeper
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            SuspendLayout();
+            // 
+            // MineSweeperForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Name = "MineSweeperForm";
+            Text = "MineSweeper";
+            Load += MineSweeperForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion
