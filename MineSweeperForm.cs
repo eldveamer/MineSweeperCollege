@@ -6,6 +6,7 @@ namespace MineSweeper
     public partial class MineSweeperForm : Form
     {
         const int spaceInBetween = 10;
+        private MineFieldForm mineFieldForm;
         private Button restartButton;
         private TextBox sizeTextBox;
         private TextBox minesTextBox;
@@ -46,23 +47,33 @@ namespace MineSweeper
 
             sizeTextBox.Enter += (sender, e) =>
             {
-                if (Regex.IsMatch(sizeTextBox.Text, @"^\d+$"))
-                {
-                    return;
-                }
-                sizeTextBox.Text = "10";
+                var val = getIntOrValue(sizeTextBox.Text, 10);
+                sizeTextBox.Text = Convert.ToString(val);
                 sizeTextBox.ForeColor = Color.Black;
             };
 
             minesTextBox.Enter += (sender, e) =>
             {
-                if (Regex.IsMatch(minesTextBox.Text, @"^\d+$"))
-                {
-                    return;
-                }
-                minesTextBox.Text = "15";
+                var val = getIntOrValue(minesTextBox.Text, 15);
+                minesTextBox.Text = Convert.ToString(val);
                 minesTextBox.ForeColor = Color.Black;
             };
+
+            restartButton.Click += (sender, e) =>
+            {
+                var mines = getIntOrValue(minesTextBox.Text, 15);
+                var size = getIntOrValue(sizeTextBox.Text, 10);
+
+                mineFieldForm = new MineFieldForm(size, mines);
+                this.Hide();
+                mineFieldForm.ShowDialog();
+                this.Show();
+            };
+        }
+
+        private int getIntOrValue(string text, int val)
+        {
+            return Regex.IsMatch(text, @"^\d+$") ? int.Parse(text) : val;
         }
 
         private void centerButton()
