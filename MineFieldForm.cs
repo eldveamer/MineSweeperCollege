@@ -13,6 +13,7 @@ namespace MineSweeper
     public partial class MineFieldForm : Form
     {
         private MineSweeperModel model;
+        private Button[,] buttons;
         const int buttonSize = 40;
         public void InitializeGame(int size)
         {
@@ -29,7 +30,7 @@ namespace MineSweeper
                         Tag = (i, j)
                     };
 
-                    //button.Click += Button_Click; 
+                    button.Click += Button_Click; 
                     this.Controls.Add(button);
                     buttons[i, j] = button;
                 }
@@ -49,7 +50,36 @@ namespace MineSweeper
             InitializeGame(size);
         }
 
-        private Button[,] buttons;
+        private void UpdateButtons()
+        {
+
+            foreach (var button in buttons) 
+            {
+                var (i, j) = ((int, int))button.Tag;
+
+                if (model.isOpen(i, j))
+                {
+                    button.Text = model.nearbyMines(i, j) > 0 ? model.nearbyMines(i, j).ToString() : "";
+                    button.BackColor = Color.LightGray;
+                    button.Enabled = false;
+                }
+
+                if (model.isOpen(i, j) && model.hasMine(i, j))
+                {
+                    button.Text = "💣"; 
+                    button.BackColor = Color.Red;
+                    button.Enabled = false; 
+                }
+            }
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            Button cell = sender as Button;
+            var (x, y) = ((int, int))cell.Tag;
+            model.click(x, y);
+            UpdateButtons();
+        }
 
         private void MineFieldForm_Load(object sender, EventArgs e)
         {

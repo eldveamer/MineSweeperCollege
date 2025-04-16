@@ -140,15 +140,14 @@ namespace MineSweeper
                 if(field[x, y].stateIsOpen)
                 {
                     return true;
-                }
+                }//нужен для остановки рекусрсии
+                
+                field[x, y].stateIsOpen = true;
                 if (field[x, y].stateIsMine)
                 {
                     return false;
                 }
-                else
-                {
-                    field[x, y].stateIsOpen = true;
-                }
+
                 if (field[x, y].stateNearbyMines > 0)
                 {
                     return true;
@@ -168,8 +167,8 @@ namespace MineSweeper
             {
                 isStarted = true;
                 mineField.fillAnew(x, y);
-                return;
             }
+            mineField.openCell(x, y);
         }
         public int countMines()
         {
@@ -190,6 +189,15 @@ namespace MineSweeper
             return mineField.field[x, y].stateIsMine;
         }
 
+        public bool isOpen(int x, int y)
+        {
+            return mineField.field[x, y].stateIsOpen;
+        }
+
+        public int nearbyMines(int x, int y)
+        {
+            return mineField.field[x, y].stateNearbyMines;
+        }
 
         private bool isStarted = false;
         private MineField mineField;
