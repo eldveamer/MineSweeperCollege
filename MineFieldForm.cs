@@ -10,11 +10,53 @@ using System.Windows.Forms;
 
 namespace MineSweeper
 {
+    public partial class EndGameForm : Form
+    {
+        Button finalMsg; 
+
+        public EndGameForm(string text)
+
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            TableLayoutPanel panel = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 1,
+                RowCount = 1,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
+            };
+
+            finalMsg = new Button
+            {
+                Text = text,
+                ForeColor = Color.Red,
+                AutoSize = true,
+                Font = new Font("Times New Roman", 24, FontStyle.Bold),
+            };
+
+            finalMsg.Click += (sender, e) =>
+            {
+                this.Close();
+            };
+
+            panel.Controls.Add(finalMsg, 0, 0);
+
+            this.Controls.Add(finalMsg);
+            this.CancelButton = finalMsg;
+        }
+    }
     public partial class MineFieldForm : Form
     {
         private MineSweeperModel model;
         private Button[,] buttons;
         const int buttonSize = 40;
+
         public void InitializeGame(int size)
         {
             buttons = new Button[size, size];
@@ -68,7 +110,7 @@ namespace MineSweeper
                 {
                     button.Text = "💣"; 
                     button.BackColor = Color.Red;
-                    button.Enabled = false; 
+                    button.Enabled = false;
                 }
             }
         }
@@ -77,8 +119,16 @@ namespace MineSweeper
         {
             Button cell = sender as Button;
             var (x, y) = ((int, int))cell.Tag;
-            model.click(x, y);
+            bool isMine = model.click(x, y);
             UpdateButtons();
+
+            if (isMine)
+            {
+                var endGameForm = new EndGameForm("Вы взорвались!");
+                this.Hide();
+                endGameForm.ShowDialog();
+                this.Close();
+            }
         }
 
         private void MineFieldForm_Load(object sender, EventArgs e)

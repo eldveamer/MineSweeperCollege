@@ -14,7 +14,10 @@ namespace MineSweeper
         public MineSweeperForm()
         {
             InitializeComponent();
-           
+
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
             this.StartPosition = FormStartPosition.CenterScreen;
 
             restartButton = new Button
@@ -37,13 +40,12 @@ namespace MineSweeper
                 Width = 100
             };
 
-            //restartButton.Click += (sender, e) => ResetGame();
             this.Controls.Add(restartButton);
             this.Controls.Add(sizeTextBox);
             this.Controls.Add(minesTextBox);
 
-            this.centerButton();
-            this.Resize += (_, _) => centerButton();
+            //this.centerButton();
+            //this.Resize += (_, _) => centerButton();
 
             sizeTextBox.Enter += (sender, e) =>
             {
@@ -69,6 +71,10 @@ namespace MineSweeper
                 mineFieldForm.ShowDialog();
                 this.Show();
             };
+
+            restartButton.Location = new Point(10, 10);
+            sizeTextBox.Location = new Point(10, restartButton.Bottom + spaceInBetween);
+            minesTextBox.Location = new Point(10, sizeTextBox.Bottom + spaceInBetween);
         }
 
         private int getIntOrValue(string text, int val)
@@ -76,16 +82,16 @@ namespace MineSweeper
             return Regex.IsMatch(text, @"^\d+$") ? int.Parse(text) : val;
         }
 
-        private void centerButton()
-        {
-            // Вычисляем координаты кнопки относительно формы
-            int buttonX = (this.ClientSize.Width - restartButton.Width) / 2;
-            int buttonY = (this.ClientSize.Height - restartButton.Height) / 2;
+        //private void centerButton()
+        //{
+         //   // Вычисляем координаты кнопки относительно формы
+           // int buttonX = (this.ClientSize.Width - restartButton.Width) / 2;
+            //int buttonY = (this.ClientSize.Height - restartButton.Height) / 2;
 
-            restartButton.Location = new Point(buttonX, buttonY);
-            sizeTextBox.Location = new Point(buttonX, buttonY + restartButton.Height + spaceInBetween);
-            minesTextBox.Location = new Point(buttonX, sizeTextBox.Location.Y + sizeTextBox.Height + spaceInBetween);
-        }
+            //restartButton.Location = new Point(buttonX, buttonY);
+            //sizeTextBox.Location = new Point(buttonX, buttonY + restartButton.Height + spaceInBetween);
+            //minesTextBox.Location = new Point(buttonX, sizeTextBox.Location.Y + sizeTextBox.Height + spaceInBetween);
+        //}
 
 
         private void MineSweeperForm_Load(object sender, EventArgs e)

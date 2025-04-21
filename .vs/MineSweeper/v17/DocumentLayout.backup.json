@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\source\\repos\\MineSweeper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minesweeperform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minesweeperform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minefieldform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minefieldform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minefieldform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minefieldform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minesweeperform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minesweeperform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minesweeperform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minesweeperform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|C:\\Users\\admin\\source\\repos\\MineSweeper\\minefieldform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minefieldform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minesweeperform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minesweeperform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|c:\\users\\admin\\source\\repos\\minesweeper\\minefieldform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|solutionrelative:minefieldform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{617A1D0E-3406-4AE0-8549-A38F8C104287}|MineSweeper.csproj|C:\\Users\\admin\\source\\repos\\MineSweeper\\minesweeperform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,20 +50,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MineFieldForm.cs",
               "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs",
               "RelativeDocumentMoniker": "MineFieldForm.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs",
-              "RelativeToolTip": "MineFieldForm.cs",
-              "ViewState": "AgIAADQAAAAAXmZmZmb2v0IAAAAoAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs*",
+              "RelativeToolTip": "MineFieldForm.cs*",
+              "ViewState": "AgIAABQAAAAAODMzMzPzvy0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-15T16:04:32.84Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "MineFieldForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.Designer.cs",
               "RelativeDocumentMoniker": "MineFieldForm.Designer.cs",
@@ -80,34 +80,34 @@
               "Title": "MineFieldForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs",
               "RelativeDocumentMoniker": "MineFieldForm.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "RelativeToolTip": "MineFieldForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineFieldForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]*",
+              "RelativeToolTip": "MineFieldForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-15T16:03:32.486Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MineSweeperForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineSweeperForm.Designer.cs",
               "RelativeDocumentMoniker": "MineSweeperForm.Designer.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineSweeperForm.Designer.cs*",
-              "RelativeToolTip": "MineSweeperForm.Designer.cs*",
-              "ViewState": "AgIAAIcAAAAAxszMzMwcwJEAAAAsAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineSweeperForm.Designer.cs",
+              "RelativeToolTip": "MineSweeperForm.Designer.cs",
+              "ViewState": "AgIAADYAAAAAoJmZmZnpv6gAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T15:23:32.414Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MineSweeperForm.cs",
               "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineSweeperForm.cs",
               "RelativeDocumentMoniker": "MineSweeperForm.cs",
               "ToolTip": "C:\\Users\\admin\\source\\repos\\MineSweeper\\MineSweeperForm.cs",
               "RelativeToolTip": "MineSweeperForm.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAwwEcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAgwD8AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T15:14:16.015Z",
               "EditorCaption": ""

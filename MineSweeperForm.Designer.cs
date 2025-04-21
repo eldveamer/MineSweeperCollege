@@ -135,33 +135,33 @@ namespace MineSweeper
                 }
             }
             
-            public bool openCell(int x, int y)
+            public void openCell(int x, int y)
             {   
                 if(field[x, y].stateIsOpen)
                 {
-                    return true;
+                    return;
                 }//нужен для остановки рекусрсии
                 
                 field[x, y].stateIsOpen = true;
                 if (field[x, y].stateIsMine)
                 {
-                    return false;
+                    return;
                 }
 
                 if (field[x, y].stateNearbyMines > 0)
                 {
-                    return true;
+                    return;
                 }
 
                 foreach (var (i, j) in nearbyIndices(x, y))
                 {
                     openCell(i, j);
                 }
-                return true;
+                return;
             }
         }
 
-        public void click (int x, int y)
+        public bool click (int x, int y)
         {
             if (!isStarted)
             {
@@ -169,6 +169,7 @@ namespace MineSweeper
                 mineField.fillAnew(x, y);
             }
             mineField.openCell(x, y);
+            return mineField.field[x, y].stateIsMine;
         }
         public int countMines()
         {
