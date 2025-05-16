@@ -54,25 +54,26 @@ namespace MineSweeper
     public partial class MineFieldForm : Form
     {
         private MineSweeperModel model;
-        private Button[,] buttons;
+        private Label[,] buttons;
         const int buttonSize = 40;
 
         public void InitializeGame(int size)
         {
-            buttons = new Button[size, size];
+            buttons = new Label[size, size];
 
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Button button = new Button
+                    Label button = new Label
                     {
                         Location = new Point(j * buttonSize, i * buttonSize),
                         Size = new Size(buttonSize, buttonSize),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        TextAlign = ContentAlignment.MiddleCenter,
                         Tag = (i, j)
                     };
-
-                    button.Click += Button_Click; 
+                    button.MouseClick += Cell_MouseClick; 
                     this.Controls.Add(button);
                     buttons[i, j] = button;
                 }
@@ -92,7 +93,7 @@ namespace MineSweeper
             InitializeGame(size);
         }
 
-        private void UpdateButtons()
+        private void UpdateCells()
         {
 
             foreach (var button in buttons) 
@@ -101,35 +102,54 @@ namespace MineSweeper
 
                 if (model.isOpen(i, j))
                 {
-                    button.Text = model.nearbyMines(i, j) > 0 ? model.nearbyMines(i, j).ToString() : "";
-                    button.BackColor = Color.LightGray;
-                    button.Enabled = false;
+                    if (model.hasMine(i, j))
+                    {
+                        button.Text = "💣";
+                        button.BackColor = Color.Red;
+                        button.Enabled = false;
+                    }
+                    else 
+                    {
+                        button.Text = model.nearbyMines(i, j) > 0 ? model.nearbyMines(i, j).ToString() : "";
+                        button.BackColor = Color.LightGray;
+                        button.Enabled = false;
+                    }
                 }
-
-                if (model.isOpen(i, j) && model.hasMine(i, j))
+                else if (model.hasFlag(i, j))
                 {
-                    button.Text = "💣"; 
-                    button.BackColor = Color.Red;
-                    button.Enabled = false;
+                    button.Text = "🚩";
+                }
+                else if (!model.hasFlag(i, j))
+                {
+                    button.Text = "";
                 }
             }
         }
 
-        private void Button_Click(object sender, EventArgs e)
+        private void Cell_MouseClick(object sender, MouseEventArgs e)
         {
-            Button cell = sender as Button;
+            Label cell = sender as Label;
             var (x, y) = ((int, int))cell.Tag;
-            bool isMine = model.click(x, y);
-            UpdateButtons();
 
-            if (isMine)
+            if (e.Button == MouseButtons.Left && !model.hasFlag(x, y))
             {
-                var endGameForm = new EndGameForm("Вы взорвались!");
-                this.Hide();
-                endGameForm.ShowDialog();
-                this.Close();
+                bool isMine = model.click(x, y);
+                UpdateCells();
+                if (isMine)
+                {
+                    var endGameForm = new EndGameForm("Вы взорвались!");
+                    endGameForm.ShowDialog();
+                    this.Close();
+                }
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                model.toggle(x, y);
+                UpdateCells();
             }
         }
+
+
 
         private void MineFieldForm_Load(object sender, EventArgs e)
         {

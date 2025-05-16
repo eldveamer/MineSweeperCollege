@@ -29,13 +29,15 @@ namespace MineSweeper
         {
             public bool stateIsOpen;
             public bool stateIsMine;
+            public bool stateHasFlag;
             public int stateNearbyMines;
             
-            public Cell(bool isOpen, bool IsMine, int nearbyMines)
+            public Cell(bool isOpen, bool IsMine, bool hasFlag, int nearbyMines)
             {
                 stateIsOpen = isOpen;
                 stateIsMine = IsMine;
                 stateNearbyMines = nearbyMines;
+                stateHasFlag = hasFlag;
             }
         }
 
@@ -63,6 +65,7 @@ namespace MineSweeper
             {
                 minesAmount = mines;
                 field = new Cell[size, size];
+                field.Initialize(() => new Cell(false, false, false, 0));
             }
 
 
@@ -99,9 +102,6 @@ namespace MineSweeper
 
             public void fillAnew(int i, int j)
             {   
-                field = new Cell[field.GetLength(0), field.GetLength(1)];
-                field.Initialize(() => new Cell(false, false, 0));
-
                 int mines = minesAmount;
                 Random random = new Random();
 
@@ -134,7 +134,6 @@ namespace MineSweeper
                     }
                 }
             }
-            
             public void openCell(int x, int y)
             {   
                 if(field[x, y].stateIsOpen)
@@ -159,6 +158,11 @@ namespace MineSweeper
                 }
                 return;
             }
+        }
+
+        public void toggle(int x, int y)
+        {
+            mineField.field[x, y].stateHasFlag = !mineField.field[x, y].stateHasFlag;
         }
 
         public bool click (int x, int y)
@@ -193,6 +197,11 @@ namespace MineSweeper
         public bool isOpen(int x, int y)
         {
             return mineField.field[x, y].stateIsOpen;
+        }
+
+        public bool hasFlag(int x, int y)
+        {
+            return mineField.field[x, y].stateHasFlag;
         }
 
         public int nearbyMines(int x, int y)
