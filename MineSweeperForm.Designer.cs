@@ -58,7 +58,7 @@ namespace MineSweeper
 
         private class MineField
         {
-            int minesAmount = 0;
+            public int minesAmount = 0;
             internal Cell[,] field;
 
             public MineField(int size, int mines)
@@ -207,6 +207,10 @@ namespace MineSweeper
         public int nearbyMines(int x, int y)
         {
             return mineField.field[x, y].stateNearbyMines;
+        }
+        public bool winCondtion()
+        {
+            return mineField.minesAmount == mineField.field.Cast<Cell>().Count(cell => !cell.stateIsOpen);
         }
 
         private bool isStarted = false;

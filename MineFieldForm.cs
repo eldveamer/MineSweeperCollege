@@ -54,28 +54,28 @@ namespace MineSweeper
     public partial class MineFieldForm : Form
     {
         private MineSweeperModel model;
-        private Label[,] buttons;
-        const int buttonSize = 40;
+        private Label[,] cells;
+        const int cellSize = 40;
 
         public void InitializeGame(int size)
         {
-            buttons = new Label[size, size];
+            cells = new Label[size, size];
 
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Label button = new Label
+                    Label cell = new Label
                     {
-                        Location = new Point(j * buttonSize, i * buttonSize),
-                        Size = new Size(buttonSize, buttonSize),
+                        Location = new Point(j * cellSize, i * cellSize),
+                        Size = new Size(cellSize, cellSize),
                         BorderStyle = BorderStyle.FixedSingle,
                         TextAlign = ContentAlignment.MiddleCenter,
                         Tag = (i, j)
                     };
-                    button.MouseClick += Cell_MouseClick; 
-                    this.Controls.Add(button);
-                    buttons[i, j] = button;
+                    cell.MouseClick += Cell_MouseClick; 
+                    this.Controls.Add(cell);
+                    cells[i, j] = cell;
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace MineSweeper
         {
             InitializeComponent();
 
-            int border = buttonSize * size;
+            int border = cellSize * size;
 
             this.model = new MineSweeperModel(size, mines);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -96,32 +96,34 @@ namespace MineSweeper
         private void UpdateCells()
         {
 
-            foreach (var button in buttons) 
+            foreach (var cell in cells) 
             {
-                var (i, j) = ((int, int))button.Tag;
+                var (i, j) = ((int, int))cell.Tag;
 
                 if (model.isOpen(i, j))
                 {
                     if (model.hasMine(i, j))
                     {
-                        button.Text = "💣";
-                        button.BackColor = Color.Red;
-                        button.Enabled = false;
+                        cell.Text = "💣";
+                        cell.BackColor = Color.Red;
+                        cell.Enabled = false;
                     }
                     else 
                     {
-                        button.Text = model.nearbyMines(i, j) > 0 ? model.nearbyMines(i, j).ToString() : "";
-                        button.BackColor = Color.LightGray;
-                        button.Enabled = false;
+                        cell.Text = model.nearbyMines(i, j) > 0 ? model.nearbyMines(i, j).ToString() : "";
+                        cell.BackColor = Color.LightGray;
+                        cell.Enabled = false;
+                        cell.ForeColor = Color.Black;
                     }
                 }
                 else if (model.hasFlag(i, j))
                 {
-                    button.Text = "🚩";
+                    cell.Text = "🚩";
+                    cell.ForeColor = Color.Red;
                 }
                 else if (!model.hasFlag(i, j))
                 {
-                    button.Text = "";
+                    cell.Text = "";
                 }
             }
         }
@@ -138,6 +140,12 @@ namespace MineSweeper
                 if (isMine)
                 {
                     var endGameForm = new EndGameForm("Вы взорвались!");
+                    endGameForm.ShowDialog();
+                    this.Close();
+                }
+                else if (model.winCondtion())
+                {
+                    var endGameForm = new EndGameForm("Вы настоящий сапёр!");
                     endGameForm.ShowDialog();
                     this.Close();
                 }
